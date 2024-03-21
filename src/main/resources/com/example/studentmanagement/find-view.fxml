@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox stylesheets="styles.css" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.studentmanagement.MainController">
+   <children>
+      <HBox alignment="CENTER" prefHeight="89.0" prefWidth="600.0">
+         <children>
+            <Label fx:id="heading" alignment="CENTER" contentDisplay="CENTER" prefHeight="17.0" prefWidth="275.0" text="Enter Student's ID" />
+         </children>
+      </HBox>
+      <HBox alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="213.0" prefWidth="600.0">
+         <children>
+            <TextField fx:id="idfind" />
+            <Button fx:id="check" mnemonicParsing="false" onAction="#update" prefHeight="25.0" prefWidth="71.0" text="Check" />
+         </children>
+      </HBox>
+      <Label fx:id="errors" alignment="CENTER" prefHeight="17.0" prefWidth="278.0" />
+   </children>
+</VBox>
