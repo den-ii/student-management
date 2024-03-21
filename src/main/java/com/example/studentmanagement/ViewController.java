@@ -22,8 +22,8 @@ public class ViewController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         ArrayList<String> students = new ArrayList<>() ;
-        for (var s: Administrator.getStudents()){
-            students.add(String.format("Name: %s, ID: %d, Age: %d, Current Grade: %.2f", s.name(), s.ID(), s.age(), s.grade()));
+        for (Student s: Administrator.getStudents()){
+            students.add(String.format("Name: %s, ID: %d, Age: %d, ", s.getName(), s.getID(), s.getAge()));
         }
         int size = students.size();
         numberOfStudents.setText(String.valueOf("Number Of Students: "+ size));

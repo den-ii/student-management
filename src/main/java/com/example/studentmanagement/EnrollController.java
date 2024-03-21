@@ -27,8 +27,8 @@ public class EnrollController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         ArrayList<String> studentList = new ArrayList<>();
         for (Student s : Administrator.getStudents()){
-            if (s.courseList().size() < 2 && !checkEnrolledCourse(s, course)){
-                studentList.add(s.ID()+" - "+s.name());
+            if (s.getCourseList().size() < 2 && !checkEnrolledCourse(s, course)){
+                studentList.add(s.getID()+" - "+s.getName());
             }
         }
         students.getItems().addAll(studentList);
@@ -36,8 +36,8 @@ public class EnrollController implements Initializable {
     }
 
     public boolean checkEnrolledCourse(Student student, Course course){
-        for (Course c: student.courseList()){
-            if (c.ID().equals(course.ID())){
+        for (Course c: student.getCourseList()){
+            if (c.getID().equals(course.getID())){
                 return true;
             }
         }

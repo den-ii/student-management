@@ -26,7 +26,7 @@ public class Administrator {
 
     public static Student checkId(int ID){
         for (Student s: Students){
-            if (s.ID() == ID){
+            if (s.getID() == ID){
                 return s;
             }
         }
@@ -35,14 +35,14 @@ public class Administrator {
 
     public static Course checkCourseId(String ID){
         for (Course c: courses){
-            if (c.ID().equals(ID)){
+            if (c.getID().equals(ID)){
                 return c;
             }
         }
         return null;
     }
     public static boolean addStudent(Student s){
-        if (checkId(s.ID()) == null){
+        if (checkId(s.getID()) == null){
             Students.add(s);
             return true;
         }
@@ -53,7 +53,7 @@ public class Administrator {
 
     public static void enroll(Student student, Course course){
         if (student != null){
-            student.courseList().add(course);
+            student.getCourseList().add(course);
         }
     }
 }

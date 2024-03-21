@@ -7,7 +7,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.control.TextField;
 
+import java.lang.String;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -17,12 +19,22 @@ public class GradeController implements Initializable {
     @FXML
     private ListView<String> list;
 
+    @FXML
+    private Label heading;
+
+    @FXML
+    private TextField grade;
+
+    private Course c;
+
+    private Student stud;
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         ArrayList<String> students = new ArrayList<>() ;
-        for (var s: Administrator.getStudents()){
-            students.add(String.format("Name: %s, ID: %d, Age: %d, Current Grade: %.2f", s.name(), s.ID(), s.age(), s.grade()));
+        for (Student s: Administrator.getStudents()){
+            students.add(String.format("Name: %s, ID: %d, Age: %d", s.getName(), s.getID(), s.getAge()));
         }
         int size = students.size();
         if (size > 0){
@@ -30,20 +42,45 @@ public class GradeController implements Initializable {
         }
         list.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
             @Override
-            public void changed(ObservableValue<? extends java.lang.String> observableValue, java.lang.String s, java.lang.String t1) {
-                int ID = Integer.parseInt(list.getSelectionModel().getSelectedItem().split("ID: ").split(",")[0]);
-                Student stud = Administrator.checkId(ID);
-                ArrayList<String> studcourse = new ArrayList<>() ;
-                for (var c: stud.courseList()){
-                    studcourse.add(String.format("Code: %s, Name: %s, : %d, Current Grade: %.2f", s.name(), s.ID(), s.age(), s.grade()));
+            public void changed(ObservableValue<? extends String> observableValue, String s, String t1) {
+                if (heading.getText().equals("Grade Update")){
+                    int ID = Integer.parseInt(list.getSelectionModel().getSelectedItem().split("ID: ")[0].split(",")[0]);
+                    stud = Administrator.checkId(ID);
+                    ArrayList<String> studcourse = new ArrayList<>() ;
+                    for (Course c: stud.getCourseList()){
+                        studcourse.add(String.format("Code: %s, Name: %s, : %d, Current Grade: %.2f", c.getName(), c.getID(), c.getGrade()));
+                    }
+                    heading.setText("Update Grade");
+                    list.getItems().addAll();
+                }
+                else{
+                    String ID = list.getSelectionModel().getSelectedItem().split("Code: ")[0].split(",")[0];
+                    c = Administrator.checkCourseId(ID);
+                     if (stud != null && c != null){
+                       for (Course cSet: stud.getCourseList()){
+                           if (cSet.getID().equals(c.getID())){
+                               grade.setText(Double.toString(c.getGrade()));
+                           }
+                       }
+
+                     }
                 }
 
-                list.getItems().addAll();
             }
         });
     }
 
-    public void updateGrade()
+    public void updateGrade(){
+        if (stud != null && c != null){
+            for (Course cSet: stud.getCourseList()){
+                if (cSet.getID().equals(c.getID())){
+                    cSet.setGrade(Double.parseDouble(grade.getText()));
+                    grade.setText(Double.toString(c.getGrade()));
+                }
+            }
+
+        }
+    }
 
     public void home(ActionEvent event) throws IOException {
         new MainController().login(event);

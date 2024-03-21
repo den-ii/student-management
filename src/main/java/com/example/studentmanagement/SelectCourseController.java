@@ -20,7 +20,7 @@ public class SelectCourseController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         ArrayList<String> courseList = new ArrayList<>();
         for (var c : Administrator.getCourses()){
-            courseList.add(c.ID());
+            courseList.add(c.getID());
         }
         courses.getItems().addAll(courseList);
         courses.setOnAction(this::pickCourse);

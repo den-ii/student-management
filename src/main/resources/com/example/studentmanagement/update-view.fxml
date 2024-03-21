@@ -69,7 +69,7 @@
                         <Insets right="10.0" />
                     </HBox.margin>
                 </Button>
-                <Button fx:id="btn" mnemonicParsing="false" onAction="#register" prefHeight="29.0" prefWidth="110.0" text="Update">
+                <Button fx:id="btn" mnemonicParsing="false" onAction="#update" prefHeight="29.0" prefWidth="110.0" text="Update">
                     <font>
                         <Font size="14.0" />
                     </font>
