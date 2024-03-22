@@ -14,6 +14,9 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+/**
+ * Controller class for managing grades.
+ */
 public class GradeController implements Initializable {
     @FXML
     private ListView<String> list;
@@ -29,6 +32,11 @@ public class GradeController implements Initializable {
     private Student stud;
 
 
+    /**
+     * Initializes the controller after its root element has been completely processed.
+     * @param url The location used to resolve relative paths for the root object, or null if the location is not known.
+     * @param resourceBundle The resources used to localize the root object, or null if the root object was not localized.
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         ArrayList<String> students = new ArrayList<>() ;
@@ -76,6 +84,11 @@ public class GradeController implements Initializable {
         });
     }
 
+    /**
+     * Updates the grade of the selected student's course.
+     * @param event The action event.
+     * @throws IOException If an I/O exception occurs.
+     */
     public void updateGrade(ActionEvent event) throws IOException {
         if (stud != null && c != null){
             for (Course cSet: stud.getCourseList()){
@@ -89,6 +102,11 @@ public class GradeController implements Initializable {
         }
     }
 
+    /**
+     * Returns to the home screen.
+     * @param event The action event.
+     * @throws IOException If an I/O exception occurs.
+     */
     public void home(ActionEvent event) throws IOException {
         new MainController().login(event);
     }

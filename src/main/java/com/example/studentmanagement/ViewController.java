@@ -11,6 +11,9 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+/**
+ * View Students
+ */
 public class ViewController implements Initializable {
     @FXML
     private ListView<String> studentsList;
@@ -19,6 +22,14 @@ public class ViewController implements Initializable {
     private Label numberOfStudents;
 
 
+
+    /**
+     * Initializes the view with the list of students.
+     * @param url The location used to resolve relative paths for the root object,
+     *            or null if the location is not known.
+     * @param resourceBundle The resources used to localize the root object,
+     *                       or null if the root object was not localized.
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         ArrayList<String> students = new ArrayList<>() ;
@@ -32,6 +43,11 @@ public class ViewController implements Initializable {
         }
     }
 
+    /**
+     * Handles the event when the go home button is clicked, navigates to home.
+     * @param event The action event triggered by clicking the home button.
+     * @throws IOException If an I/O error occurs.
+     */
     public void home(ActionEvent event) throws IOException {
         new MainController().login(event);
     }

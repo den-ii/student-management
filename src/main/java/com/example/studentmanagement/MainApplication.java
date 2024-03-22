@@ -11,6 +11,11 @@ import java.io.IOException;
 
 
 public class MainApplication extends Application {
+    /**
+     *  Sets the stage/screen, loads logo, fonts, e.tc
+     * @param stage
+     * @throws IOException
+     */
     @Override
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("main-view.fxml"));

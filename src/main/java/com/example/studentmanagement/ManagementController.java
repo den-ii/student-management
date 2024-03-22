@@ -7,6 +7,10 @@ import java.lang.String;
 
 import java.io.IOException;
 
+/**
+ * Basically, manages a Student
+ * registers and updates a Student Information.
+ */
 public class ManagementController {
     @FXML
     private TextField name;
@@ -25,6 +29,10 @@ public class ManagementController {
     private ChoiceBox courses;
 
 
+    /**
+     * Registers a new student or updates an existing student's information based on the input fields.
+     * Displays appropriate error messages if input is invalid.
+     */
     public void register(){
         int rage;
         int rid;
@@ -51,6 +59,11 @@ public class ManagementController {
         }
 
     }
+
+    /**
+     * Updates an existing student's information based on the input fields.
+     * Displays appropriate error messages if input is invalid.
+     */
     public void update(){
         int rage;
         int rid;
@@ -81,17 +94,24 @@ public class ManagementController {
     }
 
 
+    /**
+     * Redirects to the login page.
+     * @param event The ActionEvent triggering the method call.
+     * @throws IOException If an I/O error occurs.
+     */
     public void home(ActionEvent event) throws IOException {
          new MainController().login(event);
     }
 
+    /**
+     * Displays the details of the provided student  in the labels, for update.
+     * @param s The student whose details are to be displayed for update.
+     */
     public void showForUpdate(Student s){
         name.setText(s.getName());
         ID.setText(String.valueOf(s.getID()));
         age.setText(String.valueOf(s.getAge()));
     }
-
-
 
 
 }
