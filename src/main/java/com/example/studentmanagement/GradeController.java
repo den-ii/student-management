@@ -9,7 +9,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 
-import java.lang.String;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -34,7 +33,7 @@ public class GradeController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         ArrayList<String> students = new ArrayList<>() ;
         for (Student s: Administrator.getStudents()){
-            students.add(String.format("Name: %s, ID: %d, Age: %d", s.getName(), s.getID(), s.getAge()));
+            students.add(String.format("ID: %d, Name: %s, Age: %d", s.getID(), s.getName(), s.getAge()));
         }
         int size = students.size();
         if (size > 0){
@@ -43,18 +42,25 @@ public class GradeController implements Initializable {
         list.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observableValue, String s, String t1) {
+                System.out.println("clicked");
                 if (heading.getText().equals("Grade Update")){
-                    int ID = Integer.parseInt(list.getSelectionModel().getSelectedItem().split("ID: ")[0].split(",")[0]);
+                    System.out.println(list.getSelectionModel().getSelectedItem().split("ID: ")[1].split(",")[0]);
+                    int ID = Integer.parseInt(list.getSelectionModel().getSelectedItem().split("ID: ")[1].split(",")[0]);
                     stud = Administrator.checkId(ID);
+                    System.out.println(stud.toString());
                     ArrayList<String> studcourse = new ArrayList<>() ;
                     for (Course c: stud.getCourseList()){
-                        studcourse.add(String.format("Code: %s, Name: %s, : %d, Current Grade: %.2f", c.getName(), c.getID(), c.getGrade()));
+                        studcourse.add(String.format("Code: %s, Name: %s, Current Grade: %.2f",  c.getID(), c.getName(), c.getGrade()));
                     }
                     heading.setText("Update Grade");
-                    list.getItems().addAll();
+                    System.out.println(studcourse);
+                    list.getItems().addAll(studcourse);
                 }
                 else{
-                    String ID = list.getSelectionModel().getSelectedItem().split("Code: ")[0].split(",")[0];
+                    System.out.println("here");
+                    String ID = list.getSelectionModel().getSelectedItem().split("Code: ")[1].split(",")[0];
+                    System.out.println(ID);
+
                     c = Administrator.checkCourseId(ID);
                      if (stud != null && c != null){
                        for (Course cSet: stud.getCourseList()){
@@ -70,12 +76,13 @@ public class GradeController implements Initializable {
         });
     }
 
-    public void updateGrade(){
+    public void updateGrade(ActionEvent event) throws IOException {
         if (stud != null && c != null){
             for (Course cSet: stud.getCourseList()){
                 if (cSet.getID().equals(c.getID())){
                     cSet.setGrade(Double.parseDouble(grade.getText()));
                     grade.setText(Double.toString(c.getGrade()));
+                    new MainController().login(event);
                 }
             }
 
